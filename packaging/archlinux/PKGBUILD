@@ -1,11 +1,12 @@
 pkgname=tiez-clipboard-git
 _pkgname=tiez-clipboard
-pkgver=0.3.1.r7.ge6d70b9
+pkgver=0.3.1.r11.gf57f87f
 pkgrel=1
 pkgdesc="Fast cross-platform clipboard manager built with Tauri 2"
 arch=('x86_64')
 url="https://github.com/SinclairLin/tiez-clipboard"
 license=('GPL-3.0-or-later')
+options=('!lto')
 depends=(
   'appmenu-gtk-module'
   'gdk-pixbuf2'
@@ -61,6 +62,7 @@ prepare() {
 
 build() {
   cd "${srcdir}/${_pkgname}"
+  export CARGO_PROFILE_RELEASE_LTO=false
   cargo tauri build --no-bundle
 }
 
